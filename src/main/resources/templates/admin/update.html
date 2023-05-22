@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+      <meta charset="UTF-8">
+      <title>User update page</title>
+  </head>
+  <body>
+        <h1>Please edit your parametrs</h1>
+        <form th:method="PATCH" th:action="@{/admin/save-user}" th:object="${user}">
+            <input type="hidden" th:field="*{id}">
+            <label for="login">Login: </label>
+            <input type="text" th:field="*{username}" id="login" placeholder="Введите новый логин"/>
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name errors</div>
+            <br><br>
+            <label for="email">Email: </label>
+            <input type="text" th:field="*{email}" id="email" placeholder="Введите новый email">
+            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email errors</div>
+            <br><br>
+            <label for="password">Password: </label>
+            <input type="password" th:field="*{password}" id="password" placeholder="Введите новый пароль">
+            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Pass errors</div>
+            <input type="hidden" th:field="*{roles}">
+            <br><br>
+            <input type="submit" value="Сохранить">
+        </form>
+  </body>
+</html>

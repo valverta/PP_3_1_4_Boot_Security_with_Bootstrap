@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Spring Security Example</title>
 </head>
 <body>
 <h1>Welcome to Index PAGE!</h1>
+<br>
+<strong sec:authorize="!isAuthenticated()">
+    <a href="/login">Please sign in</a>
+    <br><br>
+    Or
+    <br><br>
+    <a href="/registration">Please register</a>
+</strong>
+<strong sec:authorize="isAuthenticated()">
+    <a href="/user/">Go to User page</a>
+    <br><br>
+    <txt sec:authorize="hasRole('ADMIN')">
+        Or
+        <br><br>
+        <a href="/admin/">Go to Admin page</a>
+        <br><br>
+    </txt>
+    If you want exit, please click
+    <form th:action="@{/logout}" th:method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+</strong>
 
 
 </body>

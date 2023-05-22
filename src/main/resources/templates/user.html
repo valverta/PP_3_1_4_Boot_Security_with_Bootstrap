@@ -5,7 +5,33 @@
 </head>
 <body>
 <h1>User, welcome spring boot security page!</h1>
-
-
+<br>
+<table border="1">
+    <tr>
+        <th>Login</th>
+        <th>Email</th>
+        <th>Options</th>
+    </tr>
+    <tr>
+        <td th:text="${user.username}"/>
+        <td th:text="${user.email}"/>
+        <td>
+<!--            <form th:action="@{update/{id}(id=${user.getId()})}">-->
+<!--                <input type="submit" value="Edit"/>-->
+<!--            </form>-->
+            <form th:method="POST" th:action="@{/logout}">
+                <input type="submit" value="Logout"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<br><br>
+<strong>
+    <a href="/">Перейти на главную страницу</a>
+    <br><br>
+    <txt sec:authorize="hasRole('ADMIN')">
+        <a href="/admin/">Go to Admin page</a>
+    </txt>
+</strong>
 </body>
 </html>

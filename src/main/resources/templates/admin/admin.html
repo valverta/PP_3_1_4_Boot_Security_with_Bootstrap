@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+</head>
+<body>
+<h1>All Users</h1>
+<br>
+<table border="1">
+    <tr>
+        <th>Login</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Options</th>
+    </tr>
+    <tr th:each="user : ${allUsers}">
+        <td th:text="${user.username}"/>
+        <td th:text="${user.email}"/>
+        <td>
+            <div th:each="role : ${user.getRoles()}">
+                <txt th:text="${role.roleName}"></txt>
+            </div>
+        </td>
+        <td>
+            <form th:action="@{update/{id}(id=${user.getId()})}">
+                <input type="submit" value="Редактировать"/>
+            </form>
+            <form th:method="DELETE" th:action="@{{id}(id=${user.getId()})}">
+                <input type="submit" value="Удалить">
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<input type="button" value="Добавить User`a / Зарегистрироваться"
+       onclick="window.location.href='/registration'"/>
+<br><br>
+<strong>
+    <a href="/">Go to Home page</a>
+    <br><br>
+    Or
+    <a href="/user/">Go to User page</a>
+    <br><br>
+    If you want exit, please click
+    <form th:action="@{/logout}" th:method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+</strong>
+</body>
+</html>
