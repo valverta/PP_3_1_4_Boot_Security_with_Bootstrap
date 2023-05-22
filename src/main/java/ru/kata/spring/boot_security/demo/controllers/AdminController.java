@@ -28,14 +28,14 @@ public class AdminController {
     }
 
     @GetMapping("/update/{id}")
-    public String updateRole(@PathVariable("id") long id, Model model) {
+    public String updateUser(@PathVariable("id") long id, Model model) {
         //model.addAttribute("roles", roleService.getAllRoles());
         model.addAttribute("user", userCRUDService.getUserById(id));
         return "admin/update";
     }
 
     @PatchMapping("/save-user")
-    public String saveRole(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") User user) {
         userCRUDService.saveOrUpdate(user);
         return "redirect:/admin/";
     }
