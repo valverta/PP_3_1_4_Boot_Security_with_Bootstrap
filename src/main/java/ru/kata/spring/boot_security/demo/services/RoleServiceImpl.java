@@ -22,10 +22,10 @@ public class RoleServiceImpl implements RoleService{
         return roleRepository.getById(id);
     }
 
-//    @Override
-//    public List<Role> getAllRoles() {
-//        return roleRepository.findAll();
-//    }
+    @Override
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
+    }
 
 
 }

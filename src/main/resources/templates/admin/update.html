@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
       <meta charset="UTF-8">
       <title>User update page</title>
@@ -17,9 +17,19 @@
             <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email errors</div>
             <br><br>
             <label for="password">Password: </label>
-            <input type="password" th:field="*{password}" id="password" placeholder="Введите новый пароль">
+            <input type="password" th:field="*{password}" id="password" placeholder="Введите новый пароль"/>
             <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Pass errors</div>
-            <input type="hidden" th:field="*{roles}">
+            <br><br>
+            <select th:field="*{roles}" multiple>
+                <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.roleName.substring(5)}"></option>
+            </select>
+
+<!--            <select multiple>-->
+<!--                <option th:value="${user.setRoles(allRoles.get(0))}">User</option>-->
+<!--                <option th:value="${user.setRoles(allRoles.get(1))}">Admin</option>-->
+<!--            </select>-->
+
+<!--            <input type="hidden" th:field="*{roles}">-->
             <br><br>
             <input type="submit" value="Сохранить">
         </form>
