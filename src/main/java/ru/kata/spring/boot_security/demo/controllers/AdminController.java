@@ -30,7 +30,7 @@ public class AdminController {
         return "admin/update";
     }
 
-    @PatchMapping("/save-user")
+    @PatchMapping("/update-user")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/admin/";
