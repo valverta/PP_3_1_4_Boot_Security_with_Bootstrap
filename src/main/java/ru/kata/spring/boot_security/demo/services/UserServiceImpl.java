@@ -34,7 +34,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found!");
         }
-        return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(), user.get().getAuthorities());
+        return user.get();
+//        return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(), user.get().getAuthorities());
     }
 
     @Transactional(readOnly = true)
@@ -44,7 +45,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Transactional
     public void save(User user) {
-        user.setRoles(Collections.singletonList(roleService.getById(1L)));
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }
