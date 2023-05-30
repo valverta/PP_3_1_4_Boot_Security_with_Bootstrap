@@ -38,12 +38,6 @@ public class AdminController {
         return "admin/admin";
     }
 
-    @GetMapping("/update/{id}")
-    public String updatePage(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("allRoles", roleService.getAllRoles());
-        return "admin/update";
-    }
     @PatchMapping("/update-user/{id}")
     public String updateUser(@ModelAttribute("newUser") User newUser) {
         userService.update(newUser);
